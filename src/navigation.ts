@@ -48,6 +48,6 @@ export const footerData  = {
     { text: 'Datenschutz', href: '/datenschutz' },
   ],
   socialLinks: [
-    { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/dein-nutzername' },
+    { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/chino-lu' },
   ],
 };

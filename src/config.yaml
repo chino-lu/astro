@@ -1,7 +1,7 @@
 site:
   name: HomeIQ
-  site: 'https://www.homeiq.lu'
-  base: '/'
+  site: 'https://chino-lu.github.io'
+  base: '/astro/'
   trailingSlash: false
 
   googleSiteVerificationId: orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M

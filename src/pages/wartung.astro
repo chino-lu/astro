@@ -24,6 +24,7 @@ const metadata = {
   />
 
   <Content
+    isAfterContent={true}
     isReversed
     items={[
       {
@@ -78,27 +79,18 @@ const metadata = {
     ]}
   />
 
-  <section class="relative py-16 px-4">
-    <div class="max-w-4xl mx-auto bg-slate-900 border border-blue-500/30 rounded-3xl p-8 md:p-12 shadow-2xl">
-      <div class="flex flex-col md:flex-row items-center gap-8">
-        <div class="flex-1">
-          <h2 class="text-3xl font-bold mb-4 text-white">Das HomeIQ Service-Versprechen</h2>
-          <p class="text-slate-400 mb-0">
-            Sichere dir jetzt deinen jährlichen Check-up. Wir bieten maßgeschneiderte Verträge für Privat- und Geschäftskunden in Luxemburg an.
-          </p>
+  <div class="max-w-7xl mx-auto px-4 py-20">
+    <div class="relative rounded-3xl overflow-hidden bg-slate-800 dark:bg-slate-900 shadow-2xl border border-slate-700">
+      <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-slate-700 rounded-full opacity-20"></div>
+      <div class="relative flex flex-col md:flex-row items-center justify-between p-10 md:p-16 gap-8">
+        <div class="text-white text-center md:text-left">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Sorgenfrei durch den Alltag</h2>
+          <p class="text-slate-300 text-lg max-w-md">Regelmäßige Updates und Checks halten dein Zuhause sicher und effizient. Entdecke meine Service-Pakete.</p>
         </div>
-        <div class="flex-shrink-0">
-          <a href="/kontakt#service" class="btn-primary py-4 px-8 text-lg font-bold">
-            Angebot anfordern
-          </a>
-        </div>
+        <a href="/kontakt" class="bg-primary text-white hover:bg-primary-focus px-8 py-4 rounded-xl font-bold text-lg transition-all transform hover:scale-105 shadow-lg">
+          Wartungstermin vereinbaren
+        </a>
       </div>
     </div>
-  </section>
-
-  <CallToAction
-    title="Hast du ein akutes Problem?"
-    subtitle="Auch ohne Vertrag helfen wir dir natürlich gerne bei Störungen oder Erweiterungen."
-    actions={[{ variant: 'secondary', text: 'Support-Anfrage senden', href: '/kontakt' }]}
-  />
+  </div>
 </Layout>

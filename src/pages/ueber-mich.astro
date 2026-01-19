@@ -79,20 +79,43 @@ const metadata = {
     </div>
   </section>
 
-  <CallToAction
-    title="Lass uns dein Projekt realisieren"
-    subtitle="Buche jetzt ein kostenloses Erstgespräch und lerne mich persönlich kennen."
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Zum Terminkalender',
-        href: '/kontakt#termin',
-        icon: 'tabler:calendar',
-      },
-      {
-        text: 'Direkt Kontakt aufnehmen',
-        href: '/kontakt',
-      }
-    ]}
-  />
+  <div class="max-w-7xl mx-auto px-4 py-20">
+    <div class="relative rounded-3xl overflow-hidden bg-slate-900 shadow-2xl border border-slate-800">
+      <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-primary-500 rounded-full opacity-10 blur-3xl"></div>
+      
+      <div class="relative flex flex-col md:flex-row items-center justify-between p-10 md:p-16 gap-12">
+        <div class="text-white text-center md:text-left flex-1">
+          <h2 class="text-3xl md:text-5xl font-bold mb-6 tracking-tighter">
+            Lust auf ein <span class="text-primary-400">smartes Upgrade?</span>
+          </h2>
+          <p class="text-slate-300 text-lg md:text-xl max-w-xl leading-relaxed">
+            Egal ob du gerade erst planst oder dein bestehendes System bändigen willst: Ich unterstütze dich dabei, Technik so einzusetzen, dass sie dir dient – und nicht umgekehrt.
+          </p>
+          
+          <div class="mt-8 flex flex-wrap justify-center md:justify-start gap-4 text-sm font-medium">
+            <span class="flex items-center gap-2 bg-slate-800 px-3 py-1 rounded-full border border-slate-700">
+              <svg class="w-4 h-4 text-primary-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              Persönliche Beratung
+            </span>
+            <span class="flex items-center gap-2 bg-slate-800 px-3 py-1 rounded-full border border-slate-700">
+              <svg class="w-4 h-4 text-primary-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              Herstellerunabhängig
+            </span>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-4 min-w-[200px]">
+          <a 
+            href="/kontakt" 
+            class="bg-primary text-white hover:bg-primary-focus px-8 py-4 rounded-xl font-bold text-lg text-center transition-all transform hover:scale-105 shadow-lg"
+          >
+            Anfrage senden
+          </a>
+          <p class="text-slate-400 text-xs text-center">
+            Unverbindliches Erstgespräch <br/> für dein Projekt in Luxemburg.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </Layout>

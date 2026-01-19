@@ -5,6 +5,8 @@ import Hero from '~/components/widgets/Hero.astro';
 import Content from '~/components/widgets/Content.astro';
 import Features3 from '~/components/widgets/Features3.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Features from '~/components/widgets/Features2.astro';
 
 // Bilder importieren (Sicherste Methode gegen 404)
 import energieMainImg from '~/assets/images/energie_main.png';
@@ -69,20 +71,50 @@ const metadata = {
     </Fragment>
   </Content>
 
-  <Features3
-    title="Volle Transparenz"
-    subtitle="Wisse jederzeit, wo dein Strom hinfließt."
-    columns={3}
+  <Features2
+    title="Intelligente Energie-Steuerung"
+    subtitle="Wir machen Schluss mit Rätselraten. Dein Haus steuert den Verbrauch aktiv nach dem Stand der Sonne."
     items={[
-      { title: 'Echtzeit-Daten', description: 'Visualisierung der Lastflüsse.', icon: 'tabler:chart-dots' },
-      { title: 'Historie', description: 'Vergleiche Tage und Trends.', icon: 'tabler:history' },
-      { title: 'Lokal', description: 'Deine Daten bleiben bei dir.', icon: 'tabler:shield-check' },
+      {
+        title: 'Energie-Cockpit',
+        description: 'Behalte den Überblick über Photovoltaik, Speicher und Hausverbrauch – alles in einer nahtlosen Oberfläche.',
+        icon: 'ph:gauge',
+      },
+      {
+        title: 'Stromfresser-Detektiv',
+        description: 'Entlarve Standby-Sünder und alte Geräte durch detaillierte Echtzeit-Messung jedes einzelnen Stromkreises.',
+        icon: 'ph:magnifying-glass-plus',
+      },
+      {
+        title: 'Sonne ernten',
+        description: 'Nutze Überschüsse intelligent: Dein Haus lädt das E-Auto oder heizt den Warmwasserspeicher erst, wenn genug Gratis-Strom vom Dach kommt.',
+        icon: 'ph:sun-horizon',
+      },
     ]}
   />
 
-  <CallToAction
-    title="Bereit für echte Autarkie?"
-    subtitle="Lass uns dein Sparpotenzial analysieren."
-    actions={[{ variant: 'primary', text: 'Checkup vereinbaren', href: '/kontakt#termin' }]}
-  />
+  <div class="max-w-7xl mx-auto px-4 py-20">
+    <div class="relative rounded-3xl overflow-hidden bg-amber-600 dark:bg-amber-700 shadow-2xl">
+      <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-amber-500 rounded-full opacity-20"></div>
+      
+      <div class="relative flex flex-col md:flex-row items-center justify-between p-10 md:p-16 gap-8">
+        <div class="text-white text-center md:text-left">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Energieverbrauch senken?</h2>
+          <p class="text-amber-100 text-lg max-w-md">
+            Optimiere dein Energiemanagement und nutze Ressourcen intelligent. Ich zeige dir, wie dein Smart Home aktiv Kosten spart.
+          </p>
+        </div>
+        <a 
+          href="/kontakt" 
+          class="bg-white text-amber-700 hover:bg-gray-100 px-8 py-4 rounded-xl font-bold text-lg transition-all transform hover:scale-105 shadow-lg flex items-center gap-2"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M13 3l0 7l6 0l-8 11l0 -7l-6 0l8 -11"></path>
+          </svg>
+          Energie-Check buchen
+        </a>
+      </div>
+    </div>
+  </div>
 </Layout>

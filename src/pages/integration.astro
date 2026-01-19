@@ -1,0 +1,103 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import Content from '~/components/widgets/Content.astro';
+
+const metadata = {
+  title: 'Integration & Systeme — HomeIQ',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Zertifizierte Systeme"
+    title="Technik, die <span class='text-accent'>Maßstäbe setzt</span>"
+    subtitle="Wir verbauen keine Spielereien. HomeIQ setzt auf marktführende, kommerziell erprobte Lösungen, die durch Stabilität und langlebigen Support überzeugen."
+  />
+
+  <Features2
+    title="Unsere System-Standards"
+    subtitle="Wir wählen die Technologie passend zu deinem Bauvorhaben – immer das Beste, was der Markt aktuell bietet."
+    items={[
+      {
+        title: 'Professionelle Bus-Systeme',
+        description: 'Für Neubauten setzen wir auf kabelgebundene Industriestandards – unkaputtbar und wertsteigernd.',
+        icon: 'ph:cpu',
+      },
+      {
+        title: 'Geprüfte Funklösungen',
+        description: 'Sichere, bidirektionale Funkprotokolle für die smarte Nachrüstung ohne Schlitze klopfen.',
+        icon: 'ph:waves',
+      },
+      {
+        title: 'Zentrale Intelligenz',
+        description: 'Kommerzielle Controller namhafter Hersteller garantieren lokale Datenverarbeitung und Echtzeit-Reaktion.',
+        icon: 'ph:cpu',
+      },
+    ]}
+  />
+
+  <Content
+    isReversed
+    items={[
+      {
+        title: 'Kommerzielle Verfügbarkeit',
+        description: 'Wir verbauen nur Hardware, die langfristig lieferbar ist und für die es offizielle Hersteller-Garantien gibt.',
+        icon: 'ph:package',
+      },
+      {
+        title: 'Zertifizierte Sicherheit',
+        description: 'Verschlüsselte Kommunikation und höchste Datensicherheit nach europäischen Standards.',
+        icon: 'ph:shield-checkered',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/integration_main.png',
+      alt: 'Professional Smart Home Hardware',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold mb-2">Qualität vor Experimenten</h3>
+      <p>Ein Smart Home von HomeIQ basiert auf Komponenten, die für den 24/7-Dauerbetrieb ausgelegt sind. Wir integrieren nur das, was sich im harten Markteinsatz bewährt hat.</p>
+    </Fragment>
+  </Content>
+
+  <Features3
+    title="Nahtlose Ökosysteme"
+    columns={3}
+    items={[
+      {
+        title: 'Beleuchtung',
+        description: 'DALI, KNX, Casambi – professionelles Lichtmanagement.',
+        icon: 'ph:lightbulb-filament',
+      },
+      {
+        title: 'Klimatisierung',
+        description: 'Direkte Anbindung von Wärmepumpen und Klimaanlagen via Modbus oder KNX.',
+        icon: 'ph:fan',
+      },
+      {
+        title: 'Zutrittskontrolle',
+        description: 'Smarte Türkommunikation und Keyless-Entry Lösungen.',
+        icon: 'ph:door',
+      },
+      {
+        title: 'Beschattung',
+        description: 'Präzise Steuerung von Jalousien und Markisen nach Sonnenstand.',
+        icon: 'ph:house-line',
+      },
+      {
+        title: 'Energiemanagement',
+        description: 'Schnittstellen zu Wechselrichtern und Ladestationen.',
+        icon: 'ph:solar-panel',
+      },
+      {
+        title: 'Multiroom Audio',
+        description: 'Unsichtbare Lautsprecher und professionelle Audio-Server.',
+        icon: 'ph:music-notes',
+      },
+    ]}
+  />
+</Layout>

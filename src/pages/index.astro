@@ -1,0 +1,143 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Content from '~/components/widgets/Content.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'HomeIQ — Smart Home intelligent geplant & einfach erklärt',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    actions={[
+      { variant: 'primary', text: 'Termin vereinbaren', href: '#termin', icon: 'tabler:calendar' },
+      { text: 'Mehr erfahren', href: '#features' },
+    ]}
+    image={{ src: '~/assets/images/hero-homeiq.png', alt: 'HomeIQ Smart Home Visualisierung' }}
+  >
+    <Fragment slot="title">
+      Smart Home. <span class="text-accent dark:text-white">Intelligent gelöst.</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Wir machen Technik unsichtbar und Nutzen spürbar. HomeIQ ist dein Partner für 
+      <span class="font-semibold">einfache Planung, nahtlose Integration</span> und maximale Energieeffizienz.
+    </Fragment>
+  </Hero>
+
+  <Features
+    id="features"
+    tagline="Leistungen"
+    title="Was du mit HomeIQ erreichst"
+    subtitle="Vom Neubau bis zur Optimierung deines bestehenden Systems."
+    items={[
+      {
+        title: 'Individuelle Planung',
+        description: 'Wir planen die Intelligenz deines Hauses so, dass sie auch in 10 Jahren noch begeistert.',
+        icon: 'tabler:box-model-2',
+      },
+      {
+        title: 'Nahtlose Integration',
+        description: 'Schluss mit App-Chaos. Wir binden neue Geräte sicher in Home Assistant, Apple Home oder KNX ein.',
+        icon: 'tabler:plug-connected',
+      },
+      {
+        title: 'Wartung & Full-Service',
+        description: 'Updates, Backups und Optimierungen – wir sorgen dafür, dass dein System niemals offline geht.',
+        icon: 'tabler:tools',
+      },
+    ]}
+  />
+
+  <Content
+    isReversed
+    tagline="Energie-Fokus"
+    title="Maximaler Ertrag für dein Zuhause"
+    items={[
+      {
+        title: 'PV-Optimierung',
+        description: 'Lade dein E-Auto oder steuere die Wärmepumpe genau dann, wenn die Sonne scheint.',
+      },
+      {
+        title: 'Smart Monitoring',
+        description: 'Verstehe deine Verbräuche in Echtzeit und entlarve Stromfresser sofort.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=2070&q=80',
+      alt: 'Solar Panels Image',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Dein Haus als Energiemanager</h3>
+      Hole das meiste aus deiner eigenen Energie raus und erhöhe deine Autarkie.
+    </Fragment>
+  </Content>
+
+  <Steps
+    title="In 3 Schritten zum perfekten Setup"
+    items={[
+      {
+        title: 'Schritt 1: <span class="font-medium">Kostenloses Erstgespräch</span>',
+        description: 'Wir klären deine Wünsche und prüfen die technischen Möglichkeiten deines Zuhauses.',
+        icon: 'tabler:phone-check',
+      },
+      {
+        title: 'Schritt 2: <span class="font-medium">Individuelle Planung</span>',
+        description: 'Du erhältst ein Konzept, das exakt auf deinen Alltag und dein Budget zugeschnitten ist.',
+        icon: 'tabler:ruler-2', // KORRIGIERT: Dieses Icon existiert und passt perfekt zu Planung/Messung
+      },
+      {
+        title: 'Schritt 3: <span class="font-medium">Umsetzung & Support</span>',
+        description: 'Wir integrieren die Komponenten und bleiben auch nach dem Projekt dein Ansprechpartner.',
+        icon: 'tabler:rocket',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=2070&q=80',
+      alt: 'Smart Home Control Image',
+    }}
+  />
+
+  <BlogLatestPosts
+    title="Smart Home Wissen & Tipps"
+    information="In meinem Blog teile ich ehrliche Erfahrungen und Anleitungen rund um Smart Home Trends."
+  />
+
+  <FAQs
+    title="Häufige Fragen"
+    tagline="FAQs"
+    items={[
+      {
+        title: 'Muss ich alles neu kaufen?',
+        description: 'Nein. Unser Ziel ist es, bestehende Technik sinnvoll zu integrieren und nur dort zu ergänzen, wo es echten Nutzen bringt.',
+      },
+      {
+        title: 'Wie sicher sind meine Daten?',
+        description: 'Wir setzen bevorzugt auf lokale Lösungen (Local-first). Deine Daten bleiben in deinen vier Wänden, nicht in der Cloud.',
+      },
+    ]}
+  />
+
+  <CallToAction id="termin">
+    <Fragment slot="title">
+      Bereit für <br class="block sm:hidden" /><span class="sm:whitespace-nowrap">dein HomeIQ?</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Buche jetzt dein kostenloses 15-Minuten-Erstgespräch <br class="hidden md:inline" /> 
+      und lass uns dein Projekt gemeinsam starten!
+    </Fragment>
+
+    <div class="mt-8 flex justify-center">
+       <a href="https://cal.com/dein-name" class="btn-primary py-3 px-8 rounded-lg font-bold bg-blue-600 text-white">Termin via Cal.com wählen</a>
+    </div>
+  </CallToAction>
+</Layout>

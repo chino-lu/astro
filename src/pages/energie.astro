@@ -1,0 +1,88 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+// Bilder importieren (Sicherste Methode gegen 404)
+import energieMainImg from '~/assets/images/energie_main.png';
+import energieConnectedImg from '~/assets/images/energie_connected.png';
+
+const metadata = {
+  title: 'Energie-Optimierung — HomeIQ',
+  description: 'Maximiere deine Eigenverbrauchsquote durch intelligente Steuerung von PV, Speicher und E-Auto.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Energie-Management"
+    title="Dein Haus als <span class='text-accent'>eigenes Kraftwerk</span>"
+    subtitle="Wir vernetzen deine Energieerzeuger mit deinen Verbrauchern. Intelligent, automatisch und hocheffizient."
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 overflow-hidden">
+        <Image 
+          src={energieMainImg} 
+          alt="Smart Home Energy Background" 
+          class="w-full h-full object-cover opacity-40" 
+          widths={[400, 900, 1920]}
+          layout="full-width"
+        />
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-900 via-transparent to-slate-900"></div>
+        <div class="absolute inset-x-0 bottom-0 h-40 bg-slate-900 blur-2xl opacity-90 translate-y-20"></div>
+      </div>
+    </Fragment>
+  </Hero>
+
+  <Content
+    isReversed
+    items={[
+      {
+        title: 'PV-Überschussladen',
+        description: 'Lade dein E-Auto nur dann, wenn deine Solaranlage mehr Strom produziert, als dein Haus verbraucht.',
+        icon: 'tabler:charging-pile',
+      },
+      {
+        title: 'Wärmepumpen-Steuerung',
+        description: 'Erhöhe die Vorlauftemperatur bei Sonnenüberschuss, um Energie für die Nacht zu "lagern".',
+        icon: 'tabler:temperature',
+      },
+      {
+        title: 'Speichermanagement',
+        description: 'Intelligente Strategien verhindern, dass dein Speicher bei hohen Strompreisen leer ist.',
+        icon: 'tabler:battery-automotive',
+      },
+    ]}
+    image={{
+      src: energieConnectedImg, // Auch hier das importierte Bild nutzen
+      alt: 'Smart Energy Dashboard',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2 text-balance">
+        Smarte Sektorenkopplung
+      </h3>
+      Wir bringen Photovoltaik, Heizung und Mobilität in Einklang.
+    </Fragment>
+  </Content>
+
+  <Features3
+    title="Volle Transparenz"
+    subtitle="Wisse jederzeit, wo dein Strom hinfließt."
+    columns={3}
+    items={[
+      { title: 'Echtzeit-Daten', description: 'Visualisierung der Lastflüsse.', icon: 'tabler:chart-dots' },
+      { title: 'Historie', description: 'Vergleiche Tage und Trends.', icon: 'tabler:history' },
+      { title: 'Lokal', description: 'Deine Daten bleiben bei dir.', icon: 'tabler:shield-check' },
+    ]}
+  />
+
+  <CallToAction
+    title="Bereit für echte Autarkie?"
+    subtitle="Lass uns dein Sparpotenzial analysieren."
+    actions={[{ variant: 'primary', text: 'Checkup vereinbaren', href: '/kontakt#termin' }]}
+  />
+</Layout>

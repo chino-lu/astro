@@ -1,0 +1,104 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+// import wartungImg from '~/assets/images/wartung_service.png';
+
+// Beispielbild-Import (Pass das an deine Dateinamen an)
+import wartungImg from '~/assets/images/wartung_service.png';
+
+const metadata = {
+  title: 'Wartung & Service — HomeIQ',
+  description: 'Professionelle Wartungsverträge für dein Smart Home. Sicherheit, Updates und Performance-Check-ups.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Sorglos-Paket"
+    title="Dein Smart Home in <span class='text-accent'>Bestform</span>"
+    subtitle="Ein Smart Home ist ein lebendes System. Mit unseren Wartungsverträgen bleibt dein Zuhause sicher, aktuell und leistungsstark – Jahr für Jahr."
+  />
+
+  <Content
+    isReversed
+    items={[
+      {
+        title: 'Jährlicher System-Check',
+        description: 'Wir prüfen Sensorik, Aktorik und Zentrale vor Ort oder Remote auf Herz und Nieren.',
+        icon: 'tabler:calendar-check',
+      },
+      {
+        title: 'Update-Management',
+        description: 'Wir spielen Sicherheits-Updates kontrolliert ein und stellen sicher, dass alle Integrationen weiterhin harmonieren.',
+        icon: 'tabler:refresh',
+      },
+      {
+        title: 'Bevorzugter Support',
+        description: 'Vertragskunden genießen Priorität bei Service-Anfragen und profitieren von garantierten Reaktionszeiten.',
+        icon: 'tabler:medal',
+      },
+    ]}
+    image={{
+      src: wartungImg,
+      alt: 'Service & Maintenance',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold mb-2">Warum ein Wartungsvertrag?</h3>
+      <p class="text-muted">
+        Vermeide teure Ausfälle und Sicherheitslücken. Unser Service sorgt dafür, dass deine Technik nicht veraltet, sondern mit dir mitwächst.
+      </p>
+    </Fragment>
+  </Content>
+
+  <Features3
+    title="Unsere Service-Leistungen"
+    subtitle="Wähle die passende Betreuung für deine Ansprüche."
+    columns={3}
+    items={[
+      {
+        title: 'Backup-Service',
+        description: 'Automatisierte Sicherungen deiner Konfiguration, damit im Ernstfall alles in Minuten wieder läuft.',
+        icon: 'ph:cloud-arrow-up', // Phosphor Backup Icon
+      },
+      {
+        title: 'Batterie-Service',
+        description: 'Prüfung und präventiver Tausch von Batterien in Funk-Komponenten vor der Heizsaison.',
+        icon: 'ph:battery-charging-vertical', // Phosphor Batterie Icon
+      },
+      {
+        title: 'Fernoptimierung',
+        description: 'Anpassung von Logiken und Zeitplänen ganz bequem aus der Ferne.',
+        icon: 'ph:broadcast', // Phosphor "Remote/Signal" Icon
+      },
+    ]}
+  />
+
+  <section class="relative py-16 px-4">
+    <div class="max-w-4xl mx-auto bg-slate-900 border border-blue-500/30 rounded-3xl p-8 md:p-12 shadow-2xl">
+      <div class="flex flex-col md:flex-row items-center gap-8">
+        <div class="flex-1">
+          <h2 class="text-3xl font-bold mb-4 text-white">Das HomeIQ Service-Versprechen</h2>
+          <p class="text-slate-400 mb-0">
+            Sichere dir jetzt deinen jährlichen Check-up. Wir bieten maßgeschneiderte Verträge für Privat- und Geschäftskunden in Luxemburg an.
+          </p>
+        </div>
+        <div class="flex-shrink-0">
+          <a href="/kontakt#service" class="btn-primary py-4 px-8 text-lg font-bold">
+            Angebot anfordern
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CallToAction
+    title="Hast du ein akutes Problem?"
+    subtitle="Auch ohne Vertrag helfen wir dir natürlich gerne bei Störungen oder Erweiterungen."
+    actions={[{ variant: 'secondary', text: 'Support-Anfrage senden', href: '/kontakt' }]}
+  />
+</Layout>

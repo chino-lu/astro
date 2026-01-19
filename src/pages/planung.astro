@@ -1,0 +1,25 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Content from '~/components/widgets/Content.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = { title: 'Smart Home Planung — HomeIQ' };
+---
+
+<Layout metadata={metadata}>
+  <Content
+    title="Individuelle Smart Home Planung"
+    subtitle="Die Basis für ein Zuhause, das wirklich zu dir passt."
+    items={[
+      { title: 'Bedarfsanalyse', description: 'Wir ermitteln gemeinsam, welche Funktionen deinen Alltag wirklich erleichtern.' },
+      { title: 'Herstellerunabhängigkeit', description: 'Wir wählen die Hardware, die am besten funktioniert, nicht die mit dem größten Marketingbudget.' },
+      { title: 'Zukunftssicherheit', description: 'Wir planen Reserven ein, damit dein Haus mit deinen Anforderungen mitwächst.' }
+    ]}
+    image={{ src: '~/assets/images/plannung.png', alt: 'Planung Image' }}
+  />
+  <CallToAction
+    title="Lass uns dein Projekt planen"
+    subtitle="Buche jetzt dein Erstgespräch."
+    actions={[{ variant: 'primary', text: 'Termin vereinbaren', href: '/kontakt#termin' }]}
+  />
+</Layout>

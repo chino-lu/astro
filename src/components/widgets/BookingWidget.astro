@@ -1,0 +1,62 @@
+---
+interface Props {
+  title?: string;
+  subtitle?: string;
+  calLink: string;
+}
+
+const { 
+  title = "Sichere dir deinen Slot", 
+  subtitle = "Wähle einen Termin für dein 15-minütiges Erstgespräch.", 
+  calLink 
+} = Astro.props;
+---
+
+<section class="py-12 bg-white dark:bg-slate-900 rounded-3xl shadow-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+  <div class="px-6 text-center mb-8">
+    <h3 class="text-3xl font-bold mb-3">{title}</h3>
+    <p class="text-slate-600 dark:text-slate-400 max-w-lg mx-auto">{subtitle}</p>
+  </div>
+
+  <div class="booking-container relative min-h-[600px]">
+    <div id="my-cal-inline" class="w-full h-full"></div>
+    
+    <div id="cal-loader" class="absolute inset-0 flex items-center justify-center bg-white dark:bg-slate-900 z-10 transition-opacity duration-500">
+       <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-accent"></div>
+    </div>
+  </div>
+</section>
+
+<script is:inline define:vars={{ calLink }}>
+  (function (C, A, L) {
+    let p = function (a, ar) { a.q.push(ar); };
+    let d = C.document;
+    C.Cal = C.Cal || function () {
+      let cal = C.Cal;
+      let ar = arguments;
+      if (!cal.q) { cal.q = []; }
+      p(cal, ar);
+    };
+    let js = d.createElement("script");
+    js.async = true;
+    js.src = "https://app.cal.com/embed/embed.js";
+    d.head.appendChild(js);
+    
+    C.Cal("init", {origin:"https://cal.com"});
+    
+    js.onload = function() {
+      C.Cal("inline", {
+        elementOrSelector: "#my-cal-inline",
+        calLink: calLink,
+        layout: "month_view",
+        config: { theme: 'dark' }
+      });
+      
+      // Loader ausblenden, wenn Cal geladen ist
+      setTimeout(() => {
+        document.getElementById('cal-loader').style.opacity = '0';
+        setTimeout(() => document.getElementById('cal-loader').style.display = 'none', 500);
+      }, 1500);
+    };
+  })(window, "cal");
+</script>

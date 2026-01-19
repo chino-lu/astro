@@ -1,0 +1,98 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Über mich & HomeIQ — Deine Smart Home Experten',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Über mich"
+    title="Technologie soll dem Menschen dienen – <span class='text-accent'>nicht umgekehrt.</span>"
+    subtitle="Ich bin dein Partner für intelligente Wohnkonzepte in Luxemburg, die den Alltag einfacher und effizienter machen."
+  />
+
+  <Content
+    isAfterContent={true}
+    id="about"
+    columns={3}
+    image={{
+      src: '~/assets/images/homeiq-profil.webp', // Pfad zu deinem hochgeladenen Foto
+      alt: 'Profilbild HomeIQ',
+      class: 'rounded-full shadow-lg border-4 border-accent', // Rundes Bild wie im Entwurf
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Wer steht hinter HomeIQ?</h3>
+      <p>
+        Moin! Ich bin dein Ansprechpartner bei HomeIQ. Meine Mission ist es, die oft komplexe Welt der Hausautomation 
+        greifbar und nutzbar zu machen. Als unabhängiger Berater verkaufe ich dir keine fertigen Pakete, sondern 
+        entwickle Lösungen, die exakt zu deinem Lebensstil passen.
+      </p>
+      <br />
+      <p>
+        Meine Motivation: Ein echtes „Smart Home“ sollte nicht aus zwanzig verschiedenen Apps bestehen. 
+        Es sollte im Hintergrund agieren, Energie sparen und dir Sicherheit geben, ohne dass du darüber nachdenken musst.
+      </p>
+    </Fragment>
+  </Content>
+
+  <Features3
+    title="Meine Philosophie"
+    subtitle="Wofür HomeIQ steht"
+    columns={3}
+    isBeforeContent={true}
+    items={[
+      {
+        title: 'Unabhängige Beratung',
+        description:
+          'Ich bin an keinen Hersteller gebunden. Ob Home Assistant, KNX oder Apple Home – wir wählen das System, das für dich am besten funktioniert.',
+        icon: 'tabler:shield-check',
+      },
+      {
+        title: 'Fokus auf Lokal-First',
+        description:
+          'Deine Daten gehören dir. Ich bevorzuge Lösungen, die lokal in deinem Netzwerk funktionieren und nicht von einer Cloud abhängig sind.',
+        icon: 'tabler:lock',
+      },
+      {
+        title: 'Nachhaltige Energie',
+        description:
+          'Ein smartes Haus muss effizient sein. Ich helfe dir, PV-Strom optimal zu nutzen und Verbräuche drastisch zu senken.',
+        icon: 'tabler:leaf',
+      },
+    ]}
+  />
+
+  <section class="bg-blue-50 dark:bg-slate-800 py-12 px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-4">Einfachheit trifft Intelligenz</h2>
+      <p class="text-xl text-muted">
+        „Ein Smart Home ist erst dann smart, wenn es auch funktioniert, wenn das Internet mal weg ist – 
+        und wenn jeder im Haushalt es intuitiv bedienen kann.“
+      </p>
+    </div>
+  </section>
+
+  <CallToAction
+    title="Lass uns dein Projekt realisieren"
+    subtitle="Buche jetzt ein kostenloses Erstgespräch und lerne mich persönlich kennen."
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Zum Terminkalender',
+        href: '/kontakt#termin',
+        icon: 'tabler:calendar',
+      },
+      {
+        text: 'Direkt Kontakt aufnehmen',
+        href: '/kontakt',
+      }
+    ]}
+  />
+</Layout>

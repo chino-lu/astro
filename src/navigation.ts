@@ -42,17 +42,7 @@ export const headerData = {
     },
   ],
 };
-export const footerData = {
-  links: [
-    {
-      title: 'Leistungen',
-      links: [
-        { text: 'Planung', href: '/planung' },
-        { text: 'Integration', href: '/integration' },
-        { text: 'Wartung', href: '/wartung' },
-      ],
-    },
-  ],
+export const footerData  = {
   secondaryLinks: [
     { text: 'Impressum', href: '/impressum' },
     { text: 'Datenschutz', href: '/datenschutz' },
@@ -60,5 +50,4 @@ export const footerData = {
   socialLinks: [
     { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/dein-nutzername' },
   ],
-  footNote: `© ${new Age().getFullYear()} HomeIQ · Alle Rechte vorbehalten.`,
 };

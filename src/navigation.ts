@@ -1,46 +1,10 @@
 export const headerData = {
   links: [
-    {
-      text: 'Startseite',
-      href: '/',
-    },
-    {
-      text: 'Leistungen',
-      links: [
-        {
-          text: 'Planung',
-          href: '/planung',
-        },
-        {
-          text: 'Integration',
-          href: '/integration',
-        },
-        {
-          text: 'Wartung & Service',
-          href: '/wartung',
-        },
-      ],
-    },
-    {
-      text: 'Energie',
-      href: '/energie',
-    },
-    {
-      text: 'Blog',
-      href: '/blog',
-    },
-    {
-      text: 'Über mich',
-      href: '/ueber-mich',
-    },
+    { text: 'Startseite', href: '/' },
+    { text: 'Über Mich', href: '/ueber-mich' },
+    { text: 'Blog', href: '/blog' },
   ],
-  actions: [
-    { 
-      variant: 'primary', 
-      text: 'Termin buchen', 
-      href: '/kontakt#termin', // Führt zum Cal.com Bereich
-    },
-  ],
+  actions: [{ text: 'Projekt starten', href: '/kontakt', variant: 'primary' }],
 };
 export const footerData  = {
   secondaryLinks: [

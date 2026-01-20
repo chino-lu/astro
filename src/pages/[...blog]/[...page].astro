@@ -35,7 +35,9 @@ const metadata = {
     <div class="absolute top-0 left-1/4 w-64 h-64 bg-blue-400/10 blur-[100px] -z-10"></div>
 
     <div class="text-center mb-16">
-      <h1 class="text-4xl md:text-6xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500 tracking-tight">
+      <h1
+        class="text-4xl md:text-6xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500 tracking-tight"
+      >
         SmartHome Magazin
       </h1>
       <p class="text-lg text-gray-600 dark:text-slate-400 max-w-2xl mx-auto">
@@ -47,9 +49,9 @@ const metadata = {
       {
         page.data.map(async (post: Post) => {
           const image = await findImage(post.image);
-          
+
           // Bild-URL sicher extrahieren ohne 'any'
-          let imageSrc = "";
+          let imageSrc = '';
           if (typeof image === 'string') {
             imageSrc = image;
           } else if (image && typeof image === 'object' && 'src' in image) {
@@ -57,26 +59,34 @@ const metadata = {
             imageSrc = typeof maybeSrc === 'string' ? maybeSrc : maybeSrc.src;
           }
 
-          const categoryLabel = typeof post.category === 'string' 
-            ? post.category 
-            : (post.category?.title || "SmartHome");
+          const categoryLabel = typeof post.category === 'string' ? post.category : post.category?.title || 'SmartHome';
 
           return (
             <a href={getPermalink(post.permalink, 'post')} class="group flex flex-col h-full">
               <div class="relative flex-1 bg-white dark:bg-slate-900 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-slate-800 shadow-sm hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500 hover:-translate-y-2">
-                
                 <div class="relative h-56 overflow-hidden bg-gray-100 dark:bg-slate-800">
                   {imageSrc ? (
                     <img
                       src={imageSrc}
-                      alt={post.title || "Beitrag"}
+                      alt={post.title || 'Beitrag'}
                       class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
                       loading="lazy"
                     />
                   ) : (
                     <div class="flex items-center justify-center h-full bg-blue-50 dark:bg-slate-800 text-blue-200">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-12 w-12"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1"
+                          d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                        />
                       </svg>
                     </div>
                   )}
@@ -95,14 +105,25 @@ const metadata = {
                   <p class="text-gray-600 dark:text-slate-400 text-sm line-clamp-3 mb-6 leading-relaxed">
                     {post.excerpt}
                   </p>
-                  
+
                   <div class="mt-auto flex items-center text-sm font-bold text-blue-600">
                     <span class="relative overflow-hidden group">
                       Beitrag lesen
-                      <span class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transform translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300"></span>
+                      <span class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transform translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300" />
                     </span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                      />
                     </svg>
                   </div>
                 </div>
@@ -113,19 +134,27 @@ const metadata = {
       }
     </div>
 
-    { (page.url.prev || page.url.next) && (
-      <div class="flex justify-center mt-20 gap-3">
-        {page.url.prev && (
-          <a href={page.url.prev} class="px-8 py-3 bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 rounded-2xl hover:text-blue-600 transition-all shadow-sm">
-            &larr; Vorherige
-          </a>
-        )}
-        {page.url.next && (
-          <a href={page.url.next} class="px-8 py-3 bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 rounded-2xl hover:text-blue-600 transition-all shadow-sm">
-            Nächste &rarr;
-          </a>
-        )}
-      </div>
-    )}
+    {
+      (page.url.prev || page.url.next) && (
+        <div class="flex justify-center mt-20 gap-3">
+          {page.url.prev && (
+            <a
+              href={page.url.prev}
+              class="px-8 py-3 bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 rounded-2xl hover:text-blue-600 transition-all shadow-sm"
+            >
+              &larr; Vorherige
+            </a>
+          )}
+          {page.url.next && (
+            <a
+              href={page.url.next}
+              class="px-8 py-3 bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 rounded-2xl hover:text-blue-600 transition-all shadow-sm"
+            >
+              Nächste &rarr;
+            </a>
+          )}
+        </div>
+      )
+    }
   </section>
 </Layout>

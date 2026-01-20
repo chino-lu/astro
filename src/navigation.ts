@@ -6,13 +6,11 @@ export const headerData = {
   ],
   actions: [{ text: 'Projekt starten', href: '/kontakt', variant: 'primary' }],
 };
-export const footerData  = {
+export const footerData = {
   links: [],
   secondaryLinks: [
     { text: 'Impressum', href: '/impressum' },
     { text: 'Datenschutz', href: '/datenschutz' },
   ],
-  socialLinks: [
-    { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/chino-lu' },
-  ],
+  socialLinks: [{ ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/chino-lu' }],
 };

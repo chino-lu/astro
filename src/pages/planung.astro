@@ -10,9 +10,18 @@ const metadata = { title: 'Smart Home Planung — HomeIQ' };
     title="Individuelle Smart Home Planung"
     subtitle="Die Basis für ein Zuhause, das wirklich zu dir passt."
     items={[
-      { title: 'Bedarfsanalyse', description: 'Wir ermitteln gemeinsam, welche Funktionen deinen Alltag wirklich erleichtern.' },
-      { title: 'Herstellerunabhängigkeit', description: 'Wir wählen die Hardware, die am besten funktioniert, nicht die mit dem größten Marketingbudget.' },
-      { title: 'Zukunftssicherheit', description: 'Wir planen Reserven ein, damit dein Haus mit deinen Anforderungen mitwächst.' }
+      {
+        title: 'Bedarfsanalyse',
+        description: 'Wir ermitteln gemeinsam, welche Funktionen deinen Alltag wirklich erleichtern.',
+      },
+      {
+        title: 'Herstellerunabhängigkeit',
+        description: 'Wir wählen die Hardware, die am besten funktioniert, nicht die mit dem größten Marketingbudget.',
+      },
+      {
+        title: 'Zukunftssicherheit',
+        description: 'Wir planen Reserven ein, damit dein Haus mit deinen Anforderungen mitwächst.',
+      },
     ]}
     image={{ src: '~/assets/images/plannung.png', alt: 'Planung Image' }}
   />
@@ -22,9 +31,14 @@ const metadata = { title: 'Smart Home Planung — HomeIQ' };
       <div class="relative flex flex-col md:flex-row items-center justify-between p-10 md:p-16 gap-8">
         <div class="text-white text-center md:text-left">
           <h2 class="text-3xl md:text-4xl font-bold mb-4">Bereit für den ersten Schritt?</h2>
-          <p class="text-emerald-100 text-lg max-w-md">Eine gute Planung spart Zeit und teure Fehler. Lass uns dein Projekt von Anfang an richtig aufsetzen.</p>
+          <p class="text-emerald-100 text-lg max-w-md">
+            Eine gute Planung spart Zeit und teure Fehler. Lass uns dein Projekt von Anfang an richtig aufsetzen.
+          </p>
         </div>
-        <a href="/kontakt" class="bg-white text-emerald-600 hover:bg-gray-100 px-8 py-4 rounded-xl font-bold text-lg transition-all transform hover:scale-105 shadow-lg">
+        <a
+          href="/kontakt"
+          class="bg-white text-emerald-600 hover:bg-gray-100 px-8 py-4 rounded-xl font-bold text-lg transition-all transform hover:scale-105 shadow-lg"
+        >
           Planungs-Check anfragen
         </a>
       </div>

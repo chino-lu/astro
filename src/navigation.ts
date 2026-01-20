@@ -7,6 +7,7 @@ export const headerData = {
   actions: [{ text: 'Projekt starten', href: '/kontakt', variant: 'primary' }],
 };
 export const footerData  = {
+  links: [],
   secondaryLinks: [
     { text: 'Impressum', href: '/impressum' },
     { text: 'Datenschutz', href: '/datenschutz' },

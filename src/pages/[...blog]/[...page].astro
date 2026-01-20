@@ -51,7 +51,7 @@ const metadata = {
                     // 2. Kategorie-Text sicher extrahieren
                     const categoryLabel = typeof post.category === 'string' 
                       ? post.category 
-                      : (post.category?.title || post.category?.name || "SmartHome");
+                      : (post.category?.title || "SmartHome");
 
                     return (
                       <>

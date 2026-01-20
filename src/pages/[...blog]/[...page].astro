@@ -3,14 +3,25 @@ import Layout from '~/layouts/PageLayout.astro';
 import { blogListRobots, getStaticPathsBlogList } from '~/utils/blog';
 import { findImage } from '~/utils/images';
 import { getPermalink } from '~/utils/permalinks';
+import type { GetStaticPathsOptions, Page } from 'astro';
 
 export const prerender = true;
 
-export async function getStaticPaths({ paginate }: { paginate: any }) {
+// 1. paginate Typ korrekt setzen (Fehler Zeile 9 behoben)
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   return await getStaticPathsBlogList({ paginate });
 }
 
-const { page } = Astro.props;
+// Typ-Definition für einen Blog-Post
+interface Post {
+  title: string;
+  excerpt?: string;
+  image?: string;
+  category?: string | { title: string };
+  permalink: string;
+}
+
+const { page } = Astro.props as { page: Page<Post> };
 const currentPage = page.currentPage ?? 1;
 
 const metadata = {
@@ -34,17 +45,16 @@ const metadata = {
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {
-        page.data.map(async (post: any) => {
+        page.data.map(async (post: Post) => {
           const image = await findImage(post.image);
           
-          // Logik vor dem Return, um JSX-Parsing-Fehler zu vermeiden
+          // Bild-URL sicher extrahieren ohne 'any'
           let imageSrc = "";
           if (typeof image === 'string') {
             imageSrc = image;
-          } else if (image && typeof image === 'object') {
-            // Wir nutzen hier eine alternative Syntax, die Astro nicht verwirrt
-            const imgObj = image as any; 
-            imageSrc = imgObj.src?.src || imgObj.src || "";
+          } else if (image && typeof image === 'object' && 'src' in image) {
+            const maybeSrc = (image as { src: string | { src: string } }).src;
+            imageSrc = typeof maybeSrc === 'string' ? maybeSrc : maybeSrc.src;
           }
 
           const categoryLabel = typeof post.category === 'string' 

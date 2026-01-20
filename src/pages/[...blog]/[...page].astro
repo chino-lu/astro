@@ -1,75 +1,125 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-import BlogList from '~/components/blog/List.astro';
-import Headline from '~/components/blog/Headline.astro';
-import Pagination from '~/components/blog/Pagination.astro';
-import PostTags from '~/components/blog/Tags.astro';
+import { blogListRobots, getStaticPathsBlogList } from '~/utils/blog';
+import { findImage } from '~/utils/images';
+import { getPermalink } from '~/utils/permalinks';
 
-import { blogListRobots, getStaticPathsBlogList, fetchPosts } from '~/utils/blog';
+export const prerender = true;
 
-export const getStaticPaths = async ({ paginate }) => {
+export async function getStaticPaths({ paginate }) {
   return await getStaticPathsBlogList({ paginate });
-};
+}
 
 const { page } = Astro.props;
+const currentPage = page.currentPage ?? 1;
+
 const metadata = {
-  title: `Magazin — HomeIQ`,
+  title: `SmartHome Blog ${currentPage > 1 ? `— Seite ${currentPage}` : ''}`,
   robots: blogListRobots,
 };
-
-const allPosts = await fetchPosts();
-const allCategories = [...new Set(allPosts.map((post) => post.category).filter(Boolean))];
 ---
 
 <Layout metadata={metadata}>
-  <section class="relative py-12 md:py-20 overflow-hidden bg-gradient-to-b from-blue-50 to-white dark:from-slate-900 dark:to-slate-950">
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
-      <div class="text-center max-w-3xl mx-auto">
-        <Headline
-          tagline="HomeIQ Magazin"
-          class="text-5xl md:text-6xl font-extrabold tracking-tighter mb-4 font-heading"
-        >
-          Smart Home Wissen & Trends
-        </Headline>
-        <p class="text-xl text-muted dark:text-slate-400">
-          Entdecke, wie du dein Zuhause in Luxemburg intelligenter, sicherer und energieeffizienter machst.
-        </p>
+  <section class="px-6 py-12 sm:py-20 mx-auto max-w-7xl relative">
+    <div class="absolute top-0 left-1/4 w-64 h-64 bg-blue-400/10 blur-[100px] -z-10"></div>
+
+    <div class="text-center mb-16">
+      <h1 class="text-4xl md:text-6xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500 tracking-tight">
+        SmartHome Magazin
+      </h1>
+      <p class="text-lg text-gray-600 dark:text-slate-400 max-w-2xl mx-auto">
+        Tricks, Tutorials und Inspiration für dein vernetztes Zuhause.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {
+        page.data.map(async (post) => {
+          const image = await findImage(post.image);
+          return (
+            <a href={getPermalink(post.permalink, 'post')} class="group flex flex-col h-full">
+              <div class="relative flex-1 bg-white dark:bg-slate-900 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-slate-800 shadow-sm hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500 hover:-translate-y-2">
+                
+                {/* Ersetze den gesamten Bild- und Badge-Bereich durch diesen Code */}
+                <div class="relative h-56 overflow-hidden bg-gray-100 dark:bg-slate-800">
+                  {(() => {
+                    // 1. Bild-URL sicher extrahieren
+                    const imageSrc = typeof image === 'string' 
+                      ? image 
+                      : (image?.src || (image as any)?.src?.src || "");
+
+                    // 2. Kategorie-Text sicher extrahieren
+                    const categoryLabel = typeof post.category === 'string' 
+                      ? post.category 
+                      : (post.category?.title || post.category?.name || "SmartHome");
+
+                    return (
+                      <>
+                        {imageSrc ? (
+                          <img
+                            src={imageSrc}
+                            alt={post.title || "Beitrag"}
+                            class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <div class="flex items-center justify-center h-full bg-blue-50 dark:bg-slate-800 text-blue-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                          </div>
+                        )}
+
+                        {/* Das Badge mit dem korrigierten Text */}
+                        <div class="absolute top-4 left-4">
+                          <span class="px-3 py-1 text-[11px] font-bold tracking-wider text-white uppercase bg-blue-600/80 backdrop-blur-md border border-white/20 rounded-lg shadow-sm">
+                            {categoryLabel}
+                          </span>
+                        </div>
+                      </>
+                    );
+                  })()}
+                </div>
+
+                {/* Content */}
+                <div class="p-8 flex flex-col h-[calc(100%-14rem)]">
+                  <h2 class="text-xl font-bold mb-3 group-hover:text-blue-600 transition-colors line-clamp-2 leading-snug">
+                    {post.title}
+                  </h2>
+                  <p class="text-gray-600 dark:text-slate-400 text-sm line-clamp-3 mb-6 leading-relaxed">
+                    {post.excerpt}
+                  </p>
+                  
+                  <div class="mt-auto flex items-center text-sm font-bold text-blue-600">
+                    <span class="relative overflow-hidden group">
+                      Beitrag lesen
+                      <span class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transform translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300"></span>
+                    </span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </a>
+          );
+        })
+      }
+    </div>
+
+    { (page.url.prev || page.url.next) && (
+      <div class="flex justify-center mt-20 gap-3">
+        {page.url.prev && (
+          <a href={page.url.prev} class="px-8 py-3 bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 rounded-2xl hover:text-blue-600 transition-all shadow-sm">
+            &larr; Vorherige
+          </a>
+        )}
+        {page.url.next && (
+          <a href={page.url.next} class="px-8 py-3 bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 rounded-2xl hover:text-blue-600 transition-all shadow-sm">
+            Nächste &rarr;
+          </a>
+        )}
       </div>
-    </div>
+    )}
   </section>
-
-  <section class="px-4 py-16 mx-auto max-w-7xl">
-    
-    <div class="flex flex-wrap justify-center mb-12 gap-3">
-      <a href="/blog" class="px-4 py-2 rounded-full bg-primary text-white font-medium shadow-md">Alle</a>
-      {allCategories.map((cat) => (
-        <span class="px-4 py-2 rounded-full bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 hover:border-primary transition-colors cursor-pointer text-muted dark:text-slate-300">
-          {cat}
-        </span>
-      ))}
-    </div>
-
-    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-      <BlogList posts={page.data} />
-    </div>
-
-    <div class="mt-16 border-t border-gray-100 dark:border-slate-800 pt-10">
-      <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
-    </div>
-  </section>
-
-  <div class="max-w-7xl mx-auto px-4 py-20">
-    <div class="relative rounded-3xl overflow-hidden bg-blue-600 dark:bg-blue-700 shadow-2xl">
-      <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-blue-500 rounded-full opacity-20"></div>
-      <div class="relative flex flex-col md:flex-row items-center justify-between p-10 md:p-16 gap-8">
-        <div class="text-white text-center md:text-left">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">Individuelle Beratung?</h2>
-          <p class="text-blue-100 text-lg max-w-md">Lass uns gemeinsam dein Smart Home Projekt planen. Kostenlos und unverbindlich.</p>
-        </div>
-        <a href="/kontakt" class="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-xl font-bold text-lg transition-all transform hover:scale-105 shadow-lg">
-          Jetzt Termin buchen
-        </a>
-      </div>
-    </div>
-  </div>
 </Layout>

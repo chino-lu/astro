@@ -1,10 +1,9 @@
 ---
 import { APP_BLOG } from 'astrowind:config';
-
 import { getRelatedPosts } from '~/utils/blog';
-import BlogHighlightedPosts from '../widgets/BlogHighlightedPosts.astro';
 import type { Post } from '~/types';
-import { getBlogPermalink } from '~/utils/permalinks';
+import { getPermalink } from '~/utils/permalinks';
+import { findImage } from '~/utils/images';
 
 export interface Props {
   post: Post;
@@ -12,20 +11,53 @@ export interface Props {
 
 const { post } = Astro.props;
 
-const relatedPosts = post.tags ? await getRelatedPosts(post, 4) : [];
+// Wir bleiben bei 3, damit sie nebeneinander passen, aber machen sie massiver
+const relatedPosts = post.tags ? await getRelatedPosts(post, 3) : [];
 ---
 
 {
-  APP_BLOG.isRelatedPostsEnabled ? (
-    <BlogHighlightedPosts
-      classes={{
-        container:
-          'pt-0 lg:pt-0 md:pt-0 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade',
-      }}
-      title="Related Posts"
-      linkText="View All Posts"
-      linkUrl={getBlogPermalink()}
-      postIds={relatedPosts.map((post) => post.id)}
-    />
+  APP_BLOG.isRelatedPostsEnabled && relatedPosts.length > 0 ? (
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+      {relatedPosts.map(async (relatedPost) => {
+        const image = await findImage(relatedPost.image);
+        const imageSrc = typeof image === 'string' ? image : (image?.src || "");
+
+        return (
+          <a href={getPermalink(relatedPost.permalink, 'post')} class="group flex flex-col h-full bg-white dark:bg-slate-900 rounded-[2.5rem] border border-gray-100 dark:border-slate-800 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+            
+            {/* Größeres Vorschaubild */}
+            <div class="h-48 overflow-hidden bg-gray-100 dark:bg-slate-800">
+              {imageSrc ? (
+                <img 
+                  src={imageSrc} 
+                  alt={relatedPost.title} 
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                />
+              ) : (
+                <div class="w-full h-full flex items-center justify-center text-blue-200">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                </div>
+              )}
+            </div>
+            
+            {/* Viel mehr Platz für den Content */}
+            <div class="p-6 md:p-8 flex-1 flex flex-col">
+              <h4 class="text-lg font-bold leading-tight group-hover:text-blue-600 transition-colors line-clamp-3 mb-4">
+                {relatedPost.title}
+              </h4>
+              
+              <div class="mt-auto flex items-center text-sm font-bold text-blue-600">
+                Weiterlesen
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </div>
+            </div>
+          </a>
+        );
+      })}
+    </div>
   ) : null
 }

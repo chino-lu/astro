@@ -10,7 +10,9 @@ export async function getStaticPaths({ paginate }) {
   return await getStaticPathsBlogList({ paginate });
 }
 
-const { page } = Astro.props;
+// ESLint Fix für das "any" Problem
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const { page } = Astro.props as any;
 const currentPage = page.currentPage ?? 1;
 
 const metadata = {
@@ -40,7 +42,6 @@ const metadata = {
             <a href={getPermalink(post.permalink, 'post')} class="group flex flex-col h-full">
               <div class="relative flex-1 bg-white dark:bg-slate-900 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-slate-800 shadow-sm hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500 hover:-translate-y-2">
                 
-                {/* Ersetze den gesamten Bild- und Badge-Bereich durch diesen Code */}
                 <div class="relative h-56 overflow-hidden bg-gray-100 dark:bg-slate-800">
                   {(() => {
                     // 1. Bild-URL sicher extrahieren
@@ -70,7 +71,6 @@ const metadata = {
                           </div>
                         )}
 
-                        {/* Das Badge mit dem korrigierten Text */}
                         <div class="absolute top-4 left-4">
                           <span class="px-3 py-1 text-[11px] font-bold tracking-wider text-white uppercase bg-blue-600/80 backdrop-blur-md border border-white/20 rounded-lg shadow-sm">
                             {categoryLabel}

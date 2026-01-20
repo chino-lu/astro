@@ -15,4 +15,4 @@ export const footerData  = {
   socialLinks: [
     { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/chino-lu' },
   ],
-};
+} as const;

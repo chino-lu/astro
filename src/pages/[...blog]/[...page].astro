@@ -6,7 +6,7 @@ import { getPermalink } from '~/utils/permalinks';
 
 export const prerender = true;
 
-export async function getStaticPaths({ paginate }) {
+export async function getStaticPaths({ paginate }: { paginate: any }) {
   return await getStaticPathsBlogList({ paginate });
 }
 
@@ -34,52 +34,50 @@ const metadata = {
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {
-        page.data.map(async (post) => {
+        page.data.map(async (post: any) => {
           const image = await findImage(post.image);
+          
+          // Logik vor dem Return, um JSX-Parsing-Fehler zu vermeiden
+          let imageSrc = "";
+          if (typeof image === 'string') {
+            imageSrc = image;
+          } else if (image && typeof image === 'object') {
+            // Wir nutzen hier eine alternative Syntax, die Astro nicht verwirrt
+            const imgObj = image as any; 
+            imageSrc = imgObj.src?.src || imgObj.src || "";
+          }
+
+          const categoryLabel = typeof post.category === 'string' 
+            ? post.category 
+            : (post.category?.title || "SmartHome");
+
           return (
             <a href={getPermalink(post.permalink, 'post')} class="group flex flex-col h-full">
               <div class="relative flex-1 bg-white dark:bg-slate-900 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-slate-800 shadow-sm hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500 hover:-translate-y-2">
                 
                 <div class="relative h-56 overflow-hidden bg-gray-100 dark:bg-slate-800">
-                  {(() => {
-                    // 1. Bild-URL sicher extrahieren
-                    const imageSrc = typeof image === 'string' 
-                      ? image 
-                      : (image?.src || (image as any)?.src?.src || "");
+                  {imageSrc ? (
+                    <img
+                      src={imageSrc}
+                      alt={post.title || "Beitrag"}
+                      class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div class="flex items-center justify-center h-full bg-blue-50 dark:bg-slate-800 text-blue-200">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                  )}
 
-                    // 2. Kategorie-Text sicher extrahieren
-                    const categoryLabel = typeof post.category === 'string' 
-                      ? post.category 
-                      : (post.category?.title || "SmartHome");
-
-                    return (
-                      <>
-                        {imageSrc ? (
-                          <img
-                            src={imageSrc}
-                            alt={post.title || "Beitrag"}
-                            class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
-                            loading="lazy"
-                          />
-                        ) : (
-                          <div class="flex items-center justify-center h-full bg-blue-50 dark:bg-slate-800 text-blue-200">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
-                          </div>
-                        )}
-
-                        <div class="absolute top-4 left-4">
-                          <span class="px-3 py-1 text-[11px] font-bold tracking-wider text-white uppercase bg-blue-600/80 backdrop-blur-md border border-white/20 rounded-lg shadow-sm">
-                            {categoryLabel}
-                          </span>
-                        </div>
-                      </>
-                    );
-                  })()}
+                  <div class="absolute top-4 left-4">
+                    <span class="px-3 py-1 text-[11px] font-bold tracking-wider text-white uppercase bg-blue-600/80 backdrop-blur-md border border-white/20 rounded-lg shadow-sm">
+                      {categoryLabel}
+                    </span>
+                  </div>
                 </div>
 
-                {/* Content */}
                 <div class="p-8 flex flex-col h-[calc(100%-14rem)]">
                   <h2 class="text-xl font-bold mb-3 group-hover:text-blue-600 transition-colors line-clamp-2 leading-snug">
                     {post.title}

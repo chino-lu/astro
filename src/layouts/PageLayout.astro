@@ -17,7 +17,8 @@ const { metadata } = Astro.props;
 <Layout metadata={metadata}>
   <slot name="header">
     {/* Füge den Kommentar direkt über dem Header ein */}
-    <Header {...headerData} isSticky showRssFeed showToggleTheme />
+    {/* @ts-ignore */}
+    <Header {...(headerData as any)} isSticky showRssFeed showToggleTheme />
   </slot>
   <main>
     <slot />

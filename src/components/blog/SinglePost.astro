@@ -63,7 +63,7 @@ const categorySlug =
       </h1>
 
       <p
-        class="max-w-3xl mx-auto mb-12 px-4 sm:px-6 text-xl md:text-2xl text-slate-600 dark:text-slate-400 leading-relaxed font-medium"
+        class="max-w-3xl mx-auto mb-12 px-4 sm:px-6 text-xl md:text-2xl text-slate-600 dark:text-slate-400 leading-relaxed font-medium text-justify hyphens-auto"
       >
         {post.excerpt}
       </p>
@@ -89,8 +89,9 @@ const categorySlug =
       </div>
     </header>
 
+    {/* HIER WURDEN DIE KLASSEN ERGÄNZT: text-justify und hyphens-auto */}
     <div
-      class="mx-auto px-6 max-w-3xl prose prose-lg lg:prose-xl dark:prose-invert prose-headings:font-bold prose-headings:tracking-tighter prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-img:rounded-[2rem] mt-8 leading-relaxed font-medium text-slate-700 dark:text-slate-300"
+      class="mx-auto px-6 max-w-3xl prose prose-lg lg:prose-xl dark:prose-invert prose-headings:font-bold prose-headings:tracking-tighter prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-img:rounded-[2rem] mt-8 leading-relaxed font-medium text-slate-700 dark:text-slate-300 text-justify hyphens-auto"
     >
       <slot />
     </div>
